@@ -1,0 +1,81 @@
+scan_timeout = 20
+command_timeout = 400
+
+format = """
+[ $directory ](bg:blue fg:black)\
+[](fg:blue)\
+$git_branch\
+$git_metrics\
+$git_state\
+[ ▶](fg:foreground)\n\
+$character\
+$fill\
+$nodejs\
+$time"""
+
+add_newline = true
+
+palette = "tokyo-night"
+
+[palettes.tokyo-night]
+background = "#1A1B26"
+foreground = "#C0CAF5"
+
+black = "#15161E"
+red = "#F7768E"
+green = "#9ECE6A"
+yellow = "#E0AF68"
+blue = "#7AA2F7"
+magenta = "#BB9AF7"
+cyan = "#7DCFFF"
+white = "#A9B1D6"
+
+bright_black = "#414868"
+bright_red = "#F7768E"
+bright_green = "#9ECE6A"
+bright_yellow = "#E0AF68"
+bright_blue = "#7AA2F7"
+bright_magenta = "#BB9AF7"
+bright_cyan = "#7DCFFF"
+bright_white = "#C0CAF5"
+
+orange = "#FF9E64"
+teal = "#73DACA"
+comment = "#565F89"
+selection = "#33467C"
+
+[directory]
+style = "bg:blue fg:black"
+format = "[$path]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+format = '[ $symbol$branch ]($style)'
+
+[git_metrics]
+disabled = false
+format = '[+$added ]($added_style)[-$deleted]($deleted_style)'
+added_style = 'fg:bold green'
+deleted_style = 'fg:bold red'
+only_nonzero_diffs = false
+
+[character]
+success_symbol = " "
+error_symbol = " "
+
+[fill]
+symbol = " "
+
+[nodejs]
+symbol = "⬢ "
+format = 'via [$symbol$version](bold green)'
+not_capable_style = "bold red"
+
+[time]
+format = " [$time]($style)"
+style = "bold yellow"
+use_12hr = true
+disabled = false
+time_format = "%R"
