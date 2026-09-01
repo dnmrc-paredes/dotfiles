@@ -7,7 +7,7 @@ format = """
 $git_branch\
 $git_metrics\
 $git_state\
-[ ▶](fg:foreground)\n\
+[ ▶](fg:foreground) TERMINAL\n\
 $character\
 $fill\
 $nodejs\
