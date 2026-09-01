@@ -13,3 +13,5 @@ vim.keymap.set("n", "<leader>fd", function()
         vim.cmd("normal! gg=G")
     end
 end, { desc = "Format file" })
+
+vim.keymap.set('i', 'jj', '<Esc>')
