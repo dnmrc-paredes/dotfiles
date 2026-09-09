@@ -6,7 +6,7 @@ return {
         },
         opts = {
             ui = {
-                position = 'center',
+                position = 'topleft',
                 open_win_override = {
                     title = 'Tabs',
                     border = 'single'
