@@ -11,6 +11,7 @@ $git_state\
 $character\
 $fill\
 $nodejs\
+$python\
 $time"""
 
 add_newline = true
