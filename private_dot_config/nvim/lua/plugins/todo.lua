@@ -9,7 +9,7 @@ return {
         },
         keys = {
             {
-                '<leader>st',
+                '<leader>ft',
                 '<cmd>TodoTelescope keywords=FIX,BUG,ISSUE,TODO,NOTE,TEST<cr>',
                 { desc = 'Search for TODO comments' }
             }

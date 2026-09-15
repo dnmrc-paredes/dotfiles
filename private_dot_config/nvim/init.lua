@@ -19,11 +19,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
         end
     end,
 })
-
--- Diagnostics
-
-vim.diagnostic.config({
-    signs = true,
-    virtual_text = true,
-    underline = true,
-})
