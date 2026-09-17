@@ -4,11 +4,10 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
 vim.keymap.set("n", "<leader>fd", function()
     local conform = require("conform")
-
     local formatters = conform.list_formatters_for_buffer()
 
-    if vim.tbl_contains(formatters, "prettier") then
-        conform.format({ async = true })
+    if #formatters > 0 then
+        conform.format({ async = true, lsp_fallback = true })
     else
         vim.cmd("normal! gg=G")
     end

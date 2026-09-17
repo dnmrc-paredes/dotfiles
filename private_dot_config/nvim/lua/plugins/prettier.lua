@@ -11,6 +11,7 @@ return {
                 css = { "prettier" },
                 html = { "prettier" },
                 markdown = { "prettier" },
+                python = { "isort", "black", "autopep8" }
             },
         },
     },
