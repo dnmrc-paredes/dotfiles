@@ -39,7 +39,7 @@ return {
                 sections = {
                     lualine_a = {'mode'},
                     lualine_b = {'branch', 'diff', 'diagnostics'},
-                    lualine_c = {'filename'},
+                    lualine_c = {},
                     lualine_x = {'encoding', 'fileformat', 'filetype'},
                     lualine_y = {'progress'},
                     lualine_z = {'location'}
@@ -52,7 +52,14 @@ return {
                     lualine_y = {},
                     lualine_z = {}
                 },
-                tabline = {},
+                tabline = {
+                    lualine_a = {'filename'},
+                    lualine_b = {'selectioncount'},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {'lsp_status'}
+                },
                 winbar = {},
                 inactive_winbar = {},
                 extensions = {}
