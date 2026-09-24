@@ -14,3 +14,4 @@ vim.keymap.set("n", "<leader>fd", function()
 end, { desc = "Format file" })
 
 vim.keymap.set('i', 'jj', '<Esc>')
+vim.keymap.set('n', '<leader>db', '<cmd>bd<cr>')
