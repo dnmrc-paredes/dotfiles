@@ -12,12 +12,20 @@ return {
         config = function()
             local builtin = require('telescope.builtin')
             local telescope = require('telescope')
+            local actions = require('telescope.actions')
 
             telescope.setup({
                 extensions = {
                     media_files = {
                         filetypes = { "png", "webp", "jpg", "jpeg" },
                         find_cmd = "rg",
+                    },
+                },
+                defaults = {
+                    mappings = {
+                        n = {
+                            ['q'] = actions.close,
+                        },
                     },
                 },
             })
