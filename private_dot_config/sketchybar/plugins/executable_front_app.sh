@@ -7,6 +7,9 @@
 # The items are created/updated/removed in place, so their order in the bar
 # stays stable across app switches.
 
+PLUGIN_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}/plugins"
+. "$PLUGIN_DIR/bar_display.sh"
+
 APP="$(aerospace list-windows --focused --format '%{app-name}' 2>/dev/null | head -n 1)"
 
 CHARS="$(printf '%s' "$APP" | awk '{

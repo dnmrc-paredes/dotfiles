@@ -5,6 +5,10 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
+# Only draw the bar on one display. Without this SketchyBar mirrors every
+# item onto all three screens.
+. "$PLUGIN_DIR/bar_display.sh"
+
 # Drop dynamic title items from a previous run (they are recreated by --update)
 sketchybar --remove /title_.*/ 2>/dev/null
 
@@ -29,6 +33,12 @@ sketchybar --bar position=right height=40 blur_radius=30 color=0x00000000 margin
 # We now change some default values, which are applied to all further items.
 # For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
+
+# associated_display is 1-based and picks the screen an item draws on.
+# There is no --display flag in sketchybar 2.24; setting it as a default is
+# what makes it stick to items the plugin scripts create later too (the
+# per-character title rows, the now-playing button, the badge).
+sketchybar --default associated_display="$BAR_DISPLAY"
 
 default=(
   padding_left=5
@@ -107,6 +117,15 @@ sketchybar --set workspace.1 padding_left=22
 sketchybar --add item front_app left \
            --set front_app drawing=off script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
+
+##### Now Playing #####
+# Invisible anchor polled on a timer: macOS has no event to subscribe to for
+# media changes, so the plugin re-reads the track and rebuilds its rows.
+# See plugins/now_playing.sh
+
+sketchybar --add item now_playing right \
+           --set now_playing drawing=off script="$PLUGIN_DIR/now_playing.sh" \
+           update_freq=2
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
