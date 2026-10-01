@@ -15,25 +15,33 @@ ACTIVE_BG="0xffffffff"
 ACTIVE_FG="0xff000000"
 INACTIVE_BG="0x00000000"
 INACTIVE_FG="0xffffffff"
-ACTIVE_ICON="󰐾"   # md-radiobox_marked: filled radio = the current workspace
-INACTIVE_ICON="󰀻" # md-apps: regular workspace icon
 
 [ -z "$FOCUSED" ] && FOCUSED="$(aerospace list-workspaces --focused 2>/dev/null)"
+
+# Without a focused workspace we cannot tell which row is active. Bailing out
+# leaves the current highlight untouched; repainting here would mark every row
+# inactive and make the active highlight flicker away.
+if [ -z "$FOCUSED" ]; then
+  exit 0
+fi
+
+# The highlight fills the whole row: the background covers the full 40px slot,
+# so the active workspace is a complete white box, not just a box behind the
+# digit.
+ROW_HEIGHT=40
 
 for WS in $WORKSPACES; do
   if [ "$WS" = "$FOCUSED" ]; then
     sketchybar --set "workspace.$WS" \
-      icon="$ACTIVE_ICON" \
-      icon.color=$ACTIVE_FG \
       label.color=$ACTIVE_FG \
       background.color=$ACTIVE_BG \
+      background.height=$ROW_HEIGHT \
       background.drawing=on
   else
     sketchybar --set "workspace.$WS" \
-      icon="$INACTIVE_ICON" \
-      icon.color=$INACTIVE_FG \
       label.color=$INACTIVE_FG \
       background.color=$INACTIVE_BG \
+      background.height=$ROW_HEIGHT \
       background.drawing=on
   fi
 done
