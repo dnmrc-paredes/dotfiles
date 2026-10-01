@@ -1,0 +1,96 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+# Drop dynamic title items from a previous run (they are recreated by --update)
+sketchybar --remove /title_.*/ 2>/dev/null
+
+##### AeroSpace Workspaces #####
+# Keep in sync with persistent-workspaces in aerospace.toml
+WORKSPACES=("1" "2" "3" "4" "5" "6")
+WORKSPACE_ICON="󰀻"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=right height=40 blur_radius=30 color=0x40000000
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="JetBrainsMono Nerd Font:Bold:17.0"
+  label.font="JetBrainsMono Nerd Font:Bold:14.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+##### AeroSpace Workspace Indicators #####
+# One item per workspace. Only workspace.1 carries the script; it updates
+# every item, so AeroSpace's focus callback can just trigger the event.
+# See plugins/workspace.sh
+
+sketchybar --add event aerospace_workspace_change
+
+for ws in "${WORKSPACES[@]}"
+do
+  workspace=(
+    icon="$WORKSPACE_ICON"
+    label="$ws"
+    icon.padding_left=4
+    icon.padding_right=2
+    label.padding_left=2
+    label.padding_right=4
+    background.color=0x00000000
+    background.corner_radius=5
+    background.height=30
+    background.drawing=on
+    click_script="aerospace workspace $ws"
+  )
+
+  if [ "$ws" = "${WORKSPACES[0]}" ]; then
+    workspace+=(
+      script="$PLUGIN_DIR/workspace.sh"
+      update_freq=5
+    )
+  fi
+
+  sketchybar --add item "workspace.$ws" left \
+             --set "workspace.$ws" "${workspace[@]}"
+
+  if [ "$ws" = "${WORKSPACES[0]}" ]; then
+    sketchybar --subscribe "workspace.$ws" aerospace_workspace_change
+  fi
+done
+
+##### Top Alignment #####
+# Extra top padding on the first row so it lines up with the top edge of the
+# application windows (Ghostty top sits at y=42; default first row is y=25).
+sketchybar --set workspace.1 padding_left=22
+
+##### Front App #####
+# Invisible event anchor: its script maintains the vertical title items
+# (title_0, title_1, ...) at the bottom of the bar. See plugins/front_app.sh
+
+sketchybar --add item front_app left \
+           --set front_app drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
