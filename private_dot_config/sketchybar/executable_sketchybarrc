@@ -10,7 +10,11 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 . "$PLUGIN_DIR/bar_display.sh"
 
 # Drop dynamic title items from a previous run (they are recreated by --update)
-sketchybar --remove /title_.*/ 2>/dev/null
+# Only the per-character rows: /title_.*/ also matched title_spacer and
+# title_macos, so every reload deleted the separator and the badge and
+# front_app.sh put them back after the now-playing button, flipping the
+# order of the icons at the bottom of the bar.
+sketchybar --remove '/title_[0-9]+/' 2>/dev/null
 
 ##### AeroSpace Workspaces #####
 # Keep in sync with persistent-workspaces in aerospace.toml
@@ -27,7 +31,14 @@ WORKSPACE_ICON="󰀻"
 # Fully transparent: the bar itself draws nothing, so the wallpaper shows
 # through everywhere except the rows that carry a background color.
 # margin=10 leaves a 10px gap between the bar and the right screen edge.
-sketchybar --bar position=right height=40 blur_radius=30 color=0x00000000 margin=10
+# blur_radius=0 on purpose. The bar is fully transparent, so the blur was the
+# only thing it drew: a 40px strip down the whole right edge, smeared. With no
+# item background there -- the run between the title and the controls at the
+# bottom is ~450px of it -- it read as an empty box hanging under the title,
+# very obvious on a dark wallpaper. With the blur off the bar paints nothing
+# and only the item backgrounds show. Raise it if you want the frosted strip
+# back.
+sketchybar --bar position=right height=40 blur_radius=0 color=0x00000000 margin=10
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.

@@ -73,10 +73,20 @@ for CH in $CHARS; do
     # Extra padding_right on the last letter, so the title block is not flush
     # against whatever comes next. In a side bar padding_left/padding_right
     # act along the stacking axis, so this reads as space below the row.
-    if [ "$i" -eq $((TOTAL - 1)) ]; then
-        PAD_RIGHT=10
+    # PAD_RIGHT used to be 10 on the last letter to keep the title block off
+    # whatever followed it. That is no longer true: the badge moved to the
+    # right-hand group, so the title is last in this one, and the padding had
+    # no effect at all -- the item stayed 40x25 either way. Pinned to 0 so the
+    # code matches what is actually drawn.
+    PAD_RIGHT=0
+
+    # A space in the app name ("Brave Browser") became a row of its own, which
+    # drew as an empty black block under the title. Keep the row so the words
+    # stay separated, but draw nothing in it.
+    if [ "$CH" = " " ]; then
+        ROW_BG=0x00000000
     else
-        PAD_RIGHT=0
+        ROW_BG=0xff000000
     fi
 
     if ! sketchybar --set "title_$i" label="$CH" 2>/dev/null; then
@@ -92,12 +102,14 @@ for CH in $CHARS; do
             padding_left=0 \
             padding_right=$PAD_RIGHT \
             background.drawing=on \
-            background.color=0xff000000 \
+            background.color=$ROW_BG \
             background.corner_radius=0 \
             background.height=25
     else
         # Reused row: the last row may have changed, so re-assert the padding.
-        sketchybar --set "title_$i" padding_left=0 padding_right=$PAD_RIGHT
+        # The background too, since this slot may have held a space before.
+        sketchybar --set "title_$i" padding_left=0 padding_right=$PAD_RIGHT \
+            background.color=$ROW_BG background.height=25
     fi
     i=$((i + 1))
 done
