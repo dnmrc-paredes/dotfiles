@@ -7,13 +7,16 @@
 # run for any other reason (initial update, manual run) we fall back to asking
 # AeroSpace directly.
 #
-# The background stays drawn for every workspace (transparent when inactive)
-# so that all rows keep the same height and the spacing stays even.
+# The background stays drawn for every workspace so the rows form one solid
+# black container; the height is fixed so the spacing never shifts.
+
+# The workspace block is a solid black container with white numbers; the
+# focused workspace simply inverts those two colors.
 
 WORKSPACES="1 2 3 4 5 6"
 ACTIVE_BG="0xffffffff"
 ACTIVE_FG="0xff000000"
-INACTIVE_BG="0x00000000"
+INACTIVE_BG="0xff000000"
 INACTIVE_FG="0xffffffff"
 
 [ -z "$FOCUSED" ] && FOCUSED="$(aerospace list-workspaces --focused 2>/dev/null)"

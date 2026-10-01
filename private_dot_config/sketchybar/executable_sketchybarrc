@@ -20,7 +20,10 @@ WORKSPACE_ICON="󰀻"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=right height=40 blur_radius=30 color=0x40000000
+# Fully transparent: the bar itself draws nothing, so the wallpaper shows
+# through everywhere except the rows that carry a background color.
+# margin=10 leaves a 10px gap between the bar and the right screen edge.
+sketchybar --bar position=right height=40 blur_radius=30 color=0x00000000 margin=10
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -68,7 +71,9 @@ do
     # or below it, and switching workspaces never shifts the layout.
     padding_left=0
     padding_right=0
-    background.color=0x00000000
+    # Solid black container; plugins/workspace.sh inverts this row's colors
+    # while its workspace is focused.
+    background.color=0xff000000
     background.corner_radius=0
     background.height=40
     background.drawing=on
