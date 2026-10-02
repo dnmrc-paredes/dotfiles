@@ -132,6 +132,7 @@ sketchybar --set workspace.1 padding_left=22
 # the workspace change is what makes it get the chance to run.
 sketchybar --add item front_app left \
            --set front_app drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           update_freq=5 \
            --subscribe front_app front_app_switched \
            --subscribe front_app aerospace_workspace_change
 
