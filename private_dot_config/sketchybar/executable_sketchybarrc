@@ -125,9 +125,15 @@ sketchybar --set workspace.1 padding_left=22
 # Invisible event anchor: its script maintains the vertical title items
 # (title_0, title_1, ...) at the bottom of the bar. See plugins/front_app.sh
 
+# Two subscriptions, and both are needed. front_app_switched covers ordinary
+# app switches, but it does NOT fire when the focus lands on a workspace with
+# no windows, which left the previous app's title sitting on the bar. The
+# script already clears its rows when there is no focused app; subscribing to
+# the workspace change is what makes it get the chance to run.
 sketchybar --add item front_app left \
            --set front_app drawing=off script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+           --subscribe front_app front_app_switched \
+           --subscribe front_app aerospace_workspace_change
 
 ##### Now Playing #####
 # Invisible anchor polled on a timer: macOS has no event to subscribe to for

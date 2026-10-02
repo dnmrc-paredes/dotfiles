@@ -63,6 +63,20 @@ sketchybar --add item title_spacer left --set title_spacer \
     padding_right=15
 fi
 
+# Cap the column so a long name cannot run down into the controls at the
+# bottom of the bar. 22 is what fits: the title starts at y=352, the note
+# button at y=974, rows are 25px, and 22 rows end at y=902 -- about 70px of
+# clearance. App names are almost always shorter, so this only really bites
+# once the window title lands.
+#
+# The FIRST characters are kept and the last row becomes an ellipsis. For an
+# app name that reads correctly; a window title would be better off keeping its
+# tail, since that is usually the document or the site.
+MAX_TITLE_CHARS=22
+CHARS="$(printf '%s' "$CHARS" | awk -v max="$MAX_TITLE_CHARS" -v dot="…" '
+    NR <  max { print }
+    NR == max { print dot }
+')"
 TOTAL="$(printf '%s' "$CHARS" | awk 'END { print NR }')"
 
 i=0
