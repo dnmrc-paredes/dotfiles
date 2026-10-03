@@ -1,0 +1,10 @@
+theme = Catppuccin Mocha
+macos-titlebar-style = transparent
+macos-window-buttons = hidden
+macos-titlebar-proxy-icon = hidden
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.9
+cursor-style = block
+title = " "
+macos-option-as-alt = false
