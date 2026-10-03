@@ -1,0 +1,22 @@
+## Starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
+
+## CD aliases
+alias cfgs="cd ~/.config/"
+alias root="cd ~"
+alias edz="nvim ~/.zshrc"
+alias rez="source ~/.zshrc"
+alias n="nvim"
+alias p="python3"
+alias pip="pip3"
+alias cz="chezmoi"
+
+. "$HOME/.local/bin/env"
+
+# Zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
+# Launch Aerospace
+alias las="open -a AeroSpace"
+
