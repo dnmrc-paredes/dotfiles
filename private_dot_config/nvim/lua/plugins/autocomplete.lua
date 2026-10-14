@@ -6,7 +6,7 @@ return {
             -- optional: provides snippets for the snippet source
             'rafamadriz/friendly-snippets',
         },
-        build = function() require('blink.cmp').build():pwait() end,
+        build = 'cargo build --release',
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -30,7 +30,7 @@ return {
 
             -- Fuzzy matcher configuration
             fuzzy = { 
-                implementation = "rust" 
+                implementation = "prefer_rust" 
             },
         },
     },
