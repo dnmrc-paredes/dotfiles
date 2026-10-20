@@ -15,4 +15,5 @@ abbr --add las open -a Aerospace
 abbr --add cz chezmoi
 abbr --add cfgs cd ~/.config
 abbr --add p python3
-
+abbr --add asd py_cli
+abbr --add oc opencode

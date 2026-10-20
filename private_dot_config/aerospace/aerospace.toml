@@ -62,6 +62,18 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6"]
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
 
+on-window-detected = [
+{
+    if = 'test %{app-bundle-id} = com.apple.ActivityMonitor',
+        check-further-callbacks = true,
+            run = ['layout floating']
+},{
+    if = 'test %{app-bundle-id} = com.apple.finder',
+        check-further-callbacks = true,
+            run = ['layout floating']
+}
+]
+
 focus-follows-mouse.enabled = false
 
 # Possible values: (qwerty|dvorak|colemak)
@@ -190,4 +202,5 @@ r = ['exec-and-forget open -n /Applications/Roblox.app', 'mode main']
 z = ['exec-and-forget open -n /Applications/Zen.app/', 'mode main']
 s = ['exec-and-forget open -n "/Users/bopis/Applications/Brave Browser Apps.localized/Spotify.app"', 'mode main']
 b = ['exec-and-forget open -n "/Applications/Brave Browser.app/"', 'mode main']
+d = ['exec-and-forget open -n /Applications/Discord.app/', 'mode main']
 
