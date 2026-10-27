@@ -71,6 +71,15 @@ on-window-detected = [
     if = 'test %{app-bundle-id} = com.apple.finder',
         check-further-callbacks = true,
             run = ['layout floating']
+},{
+    if = 'test %{app-bundle-id} = com.apple.systempreferences',
+        check-further-callbacks = true,
+            run = ['layout floating']
+},
+{
+    if = 'test %{app-bundle-id} = com.brave.Browser.app.pjibgclleladliembfgfagdaldikeohf',
+        check-further-callbacks = true,
+            run = ['layout floating']
 }
 ]
 
@@ -92,7 +101,7 @@ gaps.inner.horizontal = 10
 gaps.inner.vertical =   10
 gaps.outer.left =       10
 gaps.outer.bottom =     10
-gaps.outer.top =        0
+gaps.outer.top =        2
 gaps.outer.right =      10
 
 # 'main' binding mode declaration
@@ -203,4 +212,5 @@ z = ['exec-and-forget open -n /Applications/Zen.app/', 'mode main']
 s = ['exec-and-forget open -n "/Users/bopis/Applications/Brave Browser Apps.localized/Spotify.app"', 'mode main']
 b = ['exec-and-forget open -n "/Applications/Brave Browser.app/"', 'mode main']
 d = ['exec-and-forget open -n /Applications/Discord.app/', 'mode main']
-
+f = ['exec-and-forget open -a Finder', 'mode main']
+alt-s = ['exec-and-forget open -a "/System/Applications/System Settings.app/"', 'mode main']
