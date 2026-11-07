@@ -137,7 +137,8 @@ cmd-alt-h = [] # Disable "hide others"
 # 'tell application "Terminal" to tell (do script) to activate' '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-alt-slash = 'layout tiles horizontal vertical'
+alt-slash = 'layout tiles horizontal'
+alt-period = 'layout tiles vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
@@ -207,6 +208,7 @@ alt-shift-l = ['join-with right', 'mode main']
 
 esc = ['mode main']
 enter = ['exec-and-forget open -n /Applications/Ghostty.app', 'mode main']
+alt-enter = ['exec-and-forget open -n "/Applications/Rex Beta.app/"', 'mode main']
 r = ['exec-and-forget open -n /Applications/Roblox.app', 'mode main']
 z = ['exec-and-forget open -n /Applications/Zen.app/', 'mode main']
 s = ['exec-and-forget open -n "/Users/bopis/Applications/Brave Browser Apps.localized/Spotify.app"', 'mode main']
@@ -214,3 +216,8 @@ b = ['exec-and-forget open -n "/Applications/Brave Browser.app/"', 'mode main']
 d = ['exec-and-forget open -n /Applications/Discord.app/', 'mode main']
 f = ['exec-and-forget open -a Finder', 'mode main']
 alt-s = ['exec-and-forget open -a "/System/Applications/System Settings.app/"', 'mode main']
+alt-a = ['exec-and-forget open -a "/System/Applications/Utilities/Activity Monitor.app/"', 'mode main']
+h = ['exec-and-forget open -n /Applications/Helium.app/', 'mode main']
+alt-cmd-s = ['exec-and-forget open -n /Applications/Safari.app', 'mode main']
+alt-f = ['exec-and-forget open -n /Applications/Firefox.app/', 'mode main']
+g = ['exec-and-forget open -n "/Applications/Google Chrome.app/"', 'mode main']

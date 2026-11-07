@@ -15,3 +15,7 @@ end, { desc = "Format file" })
 
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('n', '<leader>db', '<cmd>bd<cr>')
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
+
+-- Press 'cr' (Change Replace) to replace the word under your cursor file-wide
+vim.keymap.set("n", "cr", [[:%s/\<<C-r><C-w>\>/]], { desc = "Replace word under cursor" })
